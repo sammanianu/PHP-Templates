@@ -19,8 +19,8 @@
 					<td>{{ employee.area }}</td>	
 					<td>
 						<a href='#!/librarySystem/{{ employee._id }}/show' class="btn btn-info">Show</a>
-						<a href="#" class="btn btn-success">Edit</a>	
-						<a click="" class="btn btn-danger">Delete</a>	
+						<a href="#!/librarySystem/{{ employee._id }}/edit" class="btn btn-success">Edit</a>	
+						<a ng-click="deleteEmployee(employee._id )" class="btn btn-danger">Delete</a>	
 					</td>				
 				</tr>
 			</tbody>

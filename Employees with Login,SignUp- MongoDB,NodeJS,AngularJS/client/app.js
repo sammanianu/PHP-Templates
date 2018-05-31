@@ -1,0 +1,24 @@
+var myApp = angular.module('myApp',['ngRoute']);
+myApp.config(function($routeProvider){
+	$routeProvider
+		.when('/',{
+			templateUrl:'templates/list.html',
+			controller:'empController'
+		})
+		.when('/librarySystem',{
+			templateUrl:'templates/list.html',
+			controller:'empController'
+		})
+		.when('/librarySystem/create',{
+			templateUrl:'templates/add.html',
+			controller:'empController'
+		})
+		.when('/librarySystem/:id/edit',{
+			templateUrl:'templates/edit.html',
+			controller:'empController'
+		})
+		.when('/librarySystem/:id/show',{
+			templateUrl:'templates/show.html',
+			controller:'empController'
+		});
+});

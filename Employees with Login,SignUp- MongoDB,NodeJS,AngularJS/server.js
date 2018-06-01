@@ -2,7 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
-var User = require('./client/models/User');
+var router = express.Router();
+var appRoutes = require('./client/routes/api')(router);
 mongoose.connect('mongodb://localhost/librarySystem');
 var  Employee = mongoose.model('Employee' , mongoose.Schema({
 	name:String,
@@ -15,6 +16,7 @@ var  Employee = mongoose.model('Employee' , mongoose.Schema({
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client'));
+app.use('/api', appRoutes);
 
 app.get('/api/librarySystem' , function(req,res){
 	Employee.find(function(err, librarySystem){
@@ -67,25 +69,6 @@ app.delete('/api/librarySystem/:id' , function(req,res){
 }); 
 
 
-//testing
-app.post('/users', function(req, res){
-	var user = new User();
-	user.username = req.body.username;
-	user.password = req.body.password;
-	user.email = req.body.email;
-	if(req.body.username==null || req.body.username == '' || req.body.password==null || req.body.password == '' || req.body.email==null || req.body.email == ''){
-		res.send('Ensure username, email and password were provided');
-	}else{
-		user.save(function(err){
-		if (err){
-			res.send("Username or Email already exists!");
-		}else{
-			res.send('user created!');
-		}
-	});
-	}
-	
-});
 
 app.listen(3000, function(){
 	console.log('server is running on port 3000...');
